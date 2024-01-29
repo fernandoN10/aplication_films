@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
-
-
 import pandas as pd
 import streamlit as st
 from sklearn.neighbors import NearestNeighbors
@@ -41,6 +37,8 @@ with st.sidebar:
             dataset_recom = dataset_ML.iloc[recom]
     
             dataset_recom = dataset_recom.loc[dataset_recom.startYear.between(years[0], years[1])]
+        else:
+            dataset_recom = dataset_ML.loc[dataset_ML.startYear.between(years[0], years[1])]
 
 row1, row2, row3, row4 = st.columns(3), st.columns(3), st.columns(3), st.columns(3)
             
