@@ -1,6 +1,10 @@
 pandas
 streamlit
+sklearn.neighbors
 NearestNeighbors
+KNeighborsClassifier
+sklearn.preprocessing
+StandardScaler
 re
 StandardScaler
 KNeighborsClassifier
