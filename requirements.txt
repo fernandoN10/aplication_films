@@ -1,0 +1,6 @@
+pandas
+streamlit
+NearestNeighbors
+re
+StandardScaler
+KNeighborsClassifier

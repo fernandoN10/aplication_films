@@ -5,6 +5,7 @@ import streamlit as st
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+import re
 
 st.set_page_config(layout='wide')
 url = 'https://image.tmdb.org/t/p/original'
@@ -18,6 +19,8 @@ st.write("")
 with st.sidebar:
     with st.form("filters"):
         film_name = st.text_input("Enter the name of your film").lower()
+        film_name = re.sub(r"[:',-]", " ", film_name)
+        film_name = re.sub(r"\s+", " ", film_name)
         years = st.slider("Release date", dataset_ML["startYear"].min(), dataset_ML["startYear"].max(), (dataset_ML["startYear"].min(),     dataset_ML["startYear"].max()))
 
         submitted = st.form_submit_button("Submit")
@@ -48,7 +51,7 @@ with st.sidebar:
             model = KNeighborsClassifier(n_neighbors=25, weights='distance').fit(X_scaled, y)
             
             #Recherche de l'indice du film recherché et des films recommandès
-            dataset_ML['primaryTitle_low'] = dataset_ML['primaryTitle'].apply(lambda x: x.lower())
+            dataset_ML['primaryTitle_low'] = dataset_ML['primaryTitle'].apply(lambda x: re.sub(r"\s+", " ", re.sub(r"[:',-]", " ", x.lower())).strip())
             #Voy a modifica la siguiente linea para que al realizar la busqueda no importe si se escribe mal
             #idx = dataset_ML.loc[dataset_ML['primaryTitle_low'] == film_name].index
             idx = dataset_ML.loc[dataset_ML['primaryTitle_low'].str.contains(film_name)].index
