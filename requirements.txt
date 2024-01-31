@@ -1,4 +1,3 @@
 pandas
 streamlit
-sklearn.neighbors
-sklearn.preprocessing
+scikit-learn
