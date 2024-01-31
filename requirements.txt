@@ -1,5 +1,6 @@
 pandas
 streamlit
+sklearn
 sklearn.neighbors
 NearestNeighbors
 KNeighborsClassifier
