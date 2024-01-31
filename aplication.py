@@ -9,7 +9,7 @@ import re
 
 st.set_page_config(layout='wide')
 url = 'https://image.tmdb.org/t/p/original'
-dataset_ML = pd.read_csv(r'C:\Users\Fernando\Documents\Project2\df_dummies.csv', sep=',')
+dataset_ML = pd.read_csv('https://raw.githubusercontent.com/fernandoN10/aplication_films/main/df_dummies.csv', sep=',')
 
 
 # In[9]:
