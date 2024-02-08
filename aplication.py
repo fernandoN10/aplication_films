@@ -238,9 +238,9 @@ if submitted:
 
         with st.container():
             st.subheader('Recomended for you:', divider='gray')
-            row1, row2, row3, row4, row5, row6, row7, row8 = st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4)
+            row1, row2, row3, row4, row5 = st.columns(3), st.columns(3), st.columns(3), st.columns(3), st.columns(3)
 
-            for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5+ row6 + row7 + row8):
+            for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5):
 
                 with col.container(border=True):
                     st.image(url + dataset_recom.iloc[i+1]['poster_path'], use_column_width="auto")
@@ -260,10 +260,10 @@ if not submitted:
     dataset_recom = dataset_ML.sort_values(by='notePondere', ascending=False)
 
     with st.container():
-        st.subheader('Recomended for you:', divider='gray')
-        row1, row2, row3, row4, row5, row6, row7, row8 = st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4)
+        st.subheader(' ', divider='gray')
+        row1, row2, row3, row4, row5 = st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4)
 
-        for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5+ row6 + row7 + row8):
+        for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5):
 
             with col.container(border=True):
                 st.image(url + dataset_recom.iloc[i]['poster_path'], use_column_width="auto")
