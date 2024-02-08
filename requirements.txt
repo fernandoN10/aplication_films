@@ -1,4 +1,4 @@
 pandas
 streamlit
 scikit-learn
-fuzzywuzzy
+fuzzywuzzy~=0.8.1
