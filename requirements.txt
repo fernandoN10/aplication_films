@@ -2,4 +2,4 @@ pandas
 streamlit
 scikit-learn
 fuzzywuzzy
-fuzz
+python-Levenshtein
