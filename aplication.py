@@ -21,7 +21,7 @@ import re
 
 
 url = 'https://image.tmdb.org/t/p/original'
-dataset_ML = pd.read_csv(r'C:\Users\Fernando\Documents\Project2\df_dummies.csv', sep=',')
+dataset_ML = pd.read_csv(r'df_dummies.csv', sep=',')
 dataset_ML['cle'] = dataset_ML['liste_actors'] + dataset_ML['liste_actress'] + dataset_ML['liste_director'] + dataset_ML['genres']
 
 # In[9]:
