@@ -257,7 +257,7 @@ if submitted:
                 
         recom = model.kneighbors([X_scaled[index_closer]])[1][0]
         dataset_recom = dataset_ML.iloc[recom]
-        dataset_recom = dataset_recom.sort_values(by='notePondere', ascending=False)
+        dataset_recom = dataset_recom.sort_values(by=['startYear', 'notePondere'], ascending=False)
 
     with st.container():
         st.subheader('', divider='gray')
