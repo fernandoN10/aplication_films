@@ -163,10 +163,10 @@ if submitted:
         X_scaled[:, positions_others] *= 1
         X_scaled[:, posiciones_genres_bonus] *= 3
         X_scaled[:, posiciones_genres] *= 3
-        X_scaled[:, posiciones_actors] *= 3
+        X_scaled[:, posiciones_actors] *= 4
         X_scaled[:, posiciones_director] *= 2
         #X_scaled[:, posiciones_startYear] *= 1.5
-        X_scaled[:, X.columns.get_loc('NL')] *= 4
+        X_scaled[:, X.columns.get_loc('NL')] *= 2
         X_scaled[:, X.columns.get_loc('title_similary')] *= 4
         #X_scaled[:, X.columns.get_loc('overview_num')] *= 2
 
