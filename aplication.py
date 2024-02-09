@@ -162,7 +162,7 @@ if submitted:
 
         X_scaled[:, positions_others] *= 1
         X_scaled[:, posiciones_genres_bonus] *= 5
-        X_scaled[:, posiciones_genres] *= 4
+        X_scaled[:, posiciones_genres] *= 8
         X_scaled[:, posiciones_actors] *= 2
         X_scaled[:, posiciones_director] *= 2
         #X_scaled[:, posiciones_startYear] *= 1.5
