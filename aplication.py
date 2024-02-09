@@ -199,6 +199,7 @@ if submitted:
 
         model = NearestNeighbors(n_neighbors=50, metric='cosine').fit(X_scaled)
         recom = model.kneighbors([X_scaled[index_movie]])[1][0]
+        dataset_recom = dataset_recom.sort_values(by:'NL', ascending=False)
         dataset_recom = dataset_ML.iloc[recom]
 
         #else:
