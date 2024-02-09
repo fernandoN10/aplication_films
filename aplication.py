@@ -20,6 +20,7 @@ Original file is located at
 # coding: utf-8
 import pandas as pd
 import streamlit as st
+import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
@@ -30,7 +31,7 @@ import re
 
 
 url = 'https://image.tmdb.org/t/p/original'
-dataset_ML = pd.read_csv(r'df_dummies.csv', sep=',')
+dataset_ML = pd.read_csv(r'C:\Users\Fernando\Documents\Project2\df_dummies.csv', sep=',')
 dataset_ML['cle'] = dataset_ML['liste_actors'] + dataset_ML['liste_actress'] + dataset_ML['liste_director'] + dataset_ML['genres']
 
 # In[9]:
@@ -64,7 +65,7 @@ with st.sidebar:
         submitted = st.form_submit_button("Submit")
 if submitted:
 
-    if film_name != '':
+    if film_name != ' ':
 
         dataset_ML['title_similary'] = dataset_ML['primaryTitle'].apply(lambda x: fuzz.ratio(film_name, x))
 
@@ -73,7 +74,7 @@ if submitted:
 
 
         X = dataset_ML.select_dtypes(include='number')
-        y = dataset_ML['primaryTitle']
+        #y = dataset_ML['primaryTitle']
 
         #Standardisation des variables explicatives
         X_scaled = StandardScaler().fit_transform(X)
@@ -200,14 +201,62 @@ if submitted:
         recom = model.kneighbors([X_scaled[index_movie]])[1][0]
         dataset_recom = dataset_ML.iloc[recom]
 
-
         #else:
 
             #dataset_recom = dataset_ML.loc[dataset_ML.startYear.between(years[0], years[1])]
 
     else:
-        st.write("Vérifie le nom du film ou essaie avec un autre")
-        dataset_recom = dataset_ML.sort_values(by='notePondere', ascending=False)
+        #st.write("Vérifie le nom du film ou essaie avec un autre")
+        #dataset_recom = dataset_ML.sort_values(by='notePondere', ascending=False)
+                # Ajout poids genres dans modèle.
+        X = dataset_ML.select_dtypes(include='number')
+        liste_cols = X.columns.to_list()        
+
+        #Standardisation des variables explicatives
+        X_scaled = StandardScaler().fit_transform(X)
+
+        posiciones_genres_list = []
+        for col in liste_cols:
+            for genre in list_genres:
+                if genre in col:
+                    posiciones_genres_list.append(liste_cols.index(col))
+        posiciones_companies_list = []
+        for col in liste_cols:
+            for company in list_companies:
+                if company in col:
+                    posiciones_companies_list.append(liste_cols.index(col))
+        posiciones_names_list = []
+        for col in liste_cols:
+            for name in list_names:
+                if name in col:
+                    posiciones_names_list.append(liste_cols.index(col))
+       
+        positions_vector_filtres = posiciones_genres_list + posiciones_companies_list + posiciones_names_list
+        positions_others_vector = [i for i in range(len(liste_cols)) if i not in positions_vector_filtres]
+        positios_vector = positions_vector_filtres + positions_others_vector
+        vector_long = max(positios_vector) + 1
+
+        vector = [0] * vector_long
+
+        for pos in positions_vector_filtres:
+            vector[pos] = 10
+        for pos in positions_others_vector:
+            vector[pos] = 0
+
+        X_scaled[:, positions_vector_filtres] *= 10
+        X_scaled[:, positions_others_vector] *= -1
+
+        vector = np.array(vector)
+        similarity = cosine_similarity(vector.reshape(1, -1), X_scaled)
+
+        model = NearestNeighbors(n_neighbors=50).fit(X_scaled)
+        
+        #distance = np.linalg.norm(X_scaled - vector, axis=1)
+        index_closer = np.argmax(similarity)
+        #cosine_similarity_matrix = cosine_similarity(X_scaled)
+                
+        recom = model.kneighbors([X_scaled[index_closer]])[1][0]
+        dataset_recom = dataset_ML.iloc[recom]
 
     with st.container():
         st.subheader('', divider='gray')
@@ -260,7 +309,7 @@ if not submitted:
     dataset_recom = dataset_ML.sort_values(by='notePondere', ascending=False)
 
     with st.container():
-        st.subheader(' ', divider='gray')
+        st.subheader('Recomended for you:', divider='gray')
         row1, row2, row3, row4, row5 = st.columns(4), st.columns(4), st.columns(4), st.columns(4), st.columns(4)
 
         for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5):
