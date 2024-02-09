@@ -160,8 +160,8 @@ if submitted:
         #X_scaled[:, position_companies_filtre] *= 1
         #X_scaled[:, position_names_filtre] *= 1
 
-        X_scaled[:, positions_others] *= 0.5
-        X_scaled[:, posiciones_genres_bonus] *= 5
+        X_scaled[:, positions_others] *= 1
+        X_scaled[:, posiciones_genres_bonus] *= 3
         X_scaled[:, posiciones_genres] *= 3
         X_scaled[:, posiciones_actors] *= 3
         X_scaled[:, posiciones_director] *= 2
