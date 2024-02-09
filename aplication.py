@@ -167,7 +167,7 @@ if submitted:
         X_scaled[:, posiciones_director] *= 2
         #X_scaled[:, posiciones_startYear] *= 1.5
         X_scaled[:, X.columns.get_loc('NL')] *= 2
-        X_scaled[:, X.columns.get_loc('title_similary')] *= 2
+        X_scaled[:, X.columns.get_loc('title_similary')] *= 4
         #X_scaled[:, X.columns.get_loc('overview_num')] *= 2
 
         # Ajout poids genres dans modèle.
