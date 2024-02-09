@@ -192,7 +192,7 @@ if submitted:
                 id_col = X.columns.get_loc(name)
                 X_scaled_recom[id_col] = abs(X_scaled_recom[id_col])
                 for i in range(len(X_scaled)) :
-                    X_scaled[i][id_col] = X_scaled[i][id_col] * 1000
+                    X_scaled[i][id_col] = X_scaled[i][id_col] * 500
 
 
         cosine_similarity_matrix = cosine_similarity(X_scaled)
