@@ -42,7 +42,8 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.write('')
 with col2:
-    st.image("logo.png", use_column_width="auto")
+    #st.image("logo.png", use_column_width="auto")
+    st.image("logo.png", use_container_width=True)
 with col3:
     st.write('')
 st.write('')
