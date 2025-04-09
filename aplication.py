@@ -266,7 +266,7 @@ if submitted:
         col1, col2, col3, col4 = st.columns(4)
 
         with col2:
-            st.image(url + dataset_recom.iloc[0]['poster_path'], width=300, use_column_width="auto")
+            st.image(url + dataset_recom.iloc[0]['poster_path'], width=300, use_container_width=True)
             #
 
         with col3:
@@ -294,7 +294,7 @@ if submitted:
             for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5):
 
                 with col.container(border=True):
-                    st.image(url + dataset_recom.iloc[i+1]['poster_path'], use_column_width="auto")
+                    st.image(url + dataset_recom.iloc[i+1]['poster_path'], use_container_width=True)
                     st.header(dataset_recom.iloc[i+1]['primaryTitle'])
                     if dataset_recom.iloc[i+1]['liste_actress'] == ' ':
                         st.write("Actors: " + str(dataset_recom.iloc[i+1]['liste_actors']))
