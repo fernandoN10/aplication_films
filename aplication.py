@@ -317,7 +317,7 @@ if not submitted:
         for i, col in zip(range(len(dataset_recom)), row1 + row2 + row3 + row4 + row5):
 
             with col.container(border=True):
-                st.image(url + dataset_recom.iloc[i]['poster_path'], use_column_width="auto")
+                st.image(url + dataset_recom.iloc[i]['poster_path'], use_container_width=True)
                 st.header(dataset_recom.iloc[i]['primaryTitle'])
                 if dataset_recom.iloc[i]['liste_actress'] == ' ':
                     st.write("Actors: " + str(dataset_recom.iloc[i]['liste_actors']))
